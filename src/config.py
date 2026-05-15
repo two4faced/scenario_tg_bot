@@ -17,6 +17,12 @@ class DBConfig:
 
 
 @dataclass
+class LogConfig:
+    level: str
+    format: str
+
+
+@dataclass
 class TgBotConfig:
     token: str
 
@@ -25,6 +31,7 @@ class TgBotConfig:
 class Config:
     bot: TgBotConfig
     database: DBConfig
+    log: LogConfig
 
 
 env: Env = Env()
@@ -39,4 +46,5 @@ settings = Config(
         user=env("DB_USER"),
         password=env("DB_PASS"),
     ),
+    log=LogConfig(level=env("LOG_LEVEL"), format=env("LOG_FORMAT")),
 )
